@@ -20,6 +20,8 @@ services:
     environment:
       # "db" is the service name above; Compose's network resolves it to the DB container
       POSTGRES_HOST: db
+      # Inside the Compose network Postgres listens on 5432; .env holds the host-published port (5433) for local tools like alembic
+      POSTGRES_PORT: 5432
     # Dev only: mount the source and run with auto-reload so code changes apply without a rebuild
     volumes:
       - ./app:/code/app

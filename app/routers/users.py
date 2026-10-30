@@ -12,7 +12,7 @@ def get_all_users(db: Session = Depends(get_db), current_user: schemas.TokenData
     return users
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.UserResponse)
-def create_new_user(user: schemas.User, db: Session = Depends(get_db), current_user: schemas.TokenData = Depends(oauth2.get_current_user)):
+def create_new_user(user: schemas.User, db: Session = Depends(get_db)):
     new_user = models.User(**user.model_dump())
     new_user.password = utils.hash(user.password)
     db.add(new_user)

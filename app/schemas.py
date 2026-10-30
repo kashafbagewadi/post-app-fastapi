@@ -1,4 +1,5 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, ConfigDict, EmailStr
+from pydantic.types import conint
 from typing import Optional
 from datetime import datetime
 
@@ -6,8 +7,7 @@ class UserResponse(BaseModel):
     id: int
     email: EmailStr
     created_at: datetime
-    class Config:
-        orm_model = True
+    model_config = ConfigDict(from_attributes=True)
 
 # Base schema for Posts table
 class PostBase(BaseModel):
@@ -26,8 +26,11 @@ class PostResponse(PostBase):
     created_at: datetime
     owner_id: int
     owner: UserResponse
-    class Config:
-        orm_model = True
+    model_config = ConfigDict(from_attributes=True)
+
+class PostVoteResponse(BaseModel):
+    Post: PostResponse
+    votes: int
 
 class User(BaseModel):
     email: EmailStr
@@ -43,3 +46,7 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     id: Optional[int] = None
+
+class Vote(BaseModel):
+    post_id: int
+    dir: conint(le=1)
