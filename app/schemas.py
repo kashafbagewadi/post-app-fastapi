@@ -2,6 +2,13 @@ from pydantic import BaseModel, EmailStr
 from typing import Optional
 from datetime import datetime
 
+class UserResponse(BaseModel):
+    id: int
+    email: EmailStr
+    created_at: datetime
+    class Config:
+        orm_model = True
+
 # Base schema for Posts table
 class PostBase(BaseModel):
     title: str
@@ -17,6 +24,8 @@ class PostRequest(PostBase):
 class PostResponse(PostBase):
     id: int
     created_at: datetime
+    owner_id: int
+    owner: UserResponse
     class Config:
         orm_model = True
 
@@ -24,13 +33,13 @@ class User(BaseModel):
     email: EmailStr
     password: str
 
-class UserResponse(BaseModel):
-    id: int
-    email: EmailStr
-    created_at: datetime
-    class Config:
-        orm_model = True
-
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    id: Optional[int] = None

@@ -1,12 +1,14 @@
 [project]
-name = "simple-post-app"
+name = "blog-post-app-fastapi"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14.7"
 dependencies = [
     "fastapi[standard]>=0.161.1",
+    "jwt>=1.4.0",
     "psycopg[binary,pool]>=3.3.6",
     "pwdlib[argon2]>=0.3.1",
+    "pyjwt>=2.15.1",
     "sqlalchemy>=2.1.6",
 ]

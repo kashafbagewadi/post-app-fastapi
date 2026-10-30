@@ -12,5 +12,5 @@ app.include_router(posts.router)
 
 @app.get("/")
 async def main():
-    return {"message": "Hello from simple-post-app!!!"}
+    return {"message": "Hello from Blog Post App - powered by FastAPI!!!"}
 
