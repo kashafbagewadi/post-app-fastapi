@@ -11,3 +11,5 @@ wheels/
 
 # Environment files (contain secrets)
 .env
+
+.DS_Store
